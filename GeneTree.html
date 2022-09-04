@@ -1,0 +1,130 @@
+
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>The African Swine Fever Virus Database</title>
+  <meta name="description" content="demo">
+  <meta name="keywords" content="demo">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp,no-store" />
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/png" href="http://asfvdb.popgenetics.net/res/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" href="http://asfvdb.popgenetics.net/res/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="demo" />
+  <link rel="stylesheet" href="http://asfvdb.popgenetics.net/res/dist/amazeui.min.css"/>
+
+
+
+
+  <link rel="stylesheet" href="http://asfvdb.popgenetics.net/res/phylo/bootstrap.min.css">
+  <link rel="stylesheet" href="http://asfvdb.popgenetics.net/res/phylo/bootstrap-theme.min.css">
+  <link href="http://asfvdb.popgenetics.net/res/phylo/phylotree.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://asfvdb.popgenetics.net/res/phylo/default.min.css">
+
+  <script src="http://asfvdb.popgenetics.net/res/phylo/highlight.min.js"></script>
+  <script src="http://asfvdb.popgenetics.net/res/dist/jquery.min.js"></script>
+  <script src="http://asfvdb.popgenetics.net/res/phylo/bootstrap.min.js"></script>
+  <script src="http://asfvdb.popgenetics.net/res/js/d3.v3.min.js"></script>
+  <script src="http://asfvdb.popgenetics.net/res/phylo/phylotree.js"></script>
+  <script src="http://asfvdb.popgenetics.net/res/phylo/underscore-min.js" charset="utf-8"></script>
+
+
+</head>
+<body>
+ <center>
+ <div style="width:100%; margin-left:auto; margin-right:auto">
+  <svg id="tree_display" />
+  </div>
+	  <script>
+    var example_tree = "(Malawi_Tengani_1962_CAN10098.1:0.02931,(((Italy_26544_OG10_2010_AJZ77131.1:0.0,Italy_47_Ss_2008_2008_AOO54309.1:0.0):0.00055,((((China_ASFV-SY18_2018_AOO54308.1:0.00055,((Poland_Pol16_20186_o7_2016-2017_AXZ95769.1:0.0,Poland_Pol16_20538_o9_2016-2017_AXZ95935.1:0.0,Poland_Pol16_20540_o10_2016-2017_AXZ95946.1:0.0,Poland_Pol16_29413_o23_2016-2017_AXZ95949.1:0.0,Poland_Pol17_03029_C201_2016-2017_AXZ95966.1:0.0,Poland_Pol17_04461_C210_2016-2017_AXZ96061.1:0.0,Poland_Pol17_05838_C220_2016-2017_AXZ96220.1:0.0):0.00406,((China_wbBS01_2018_QDL88010.1:0.0,Ukraine_Kyiv_2014_QED21540.1:0.0,Lithuania_LT14_2014_QEY87783.1:0.0):0.00055,((China_ASFV-SY18_2018_AKO62684.1:0.0,Russia_Georgia_2007_CBW46643.1:0.0):0.00055,China_ASFV-SY18_2018_AJZ77131.1:0.00055)0.899:0.00404)0.588:0.01248)0.756:0.01874)0.056:0.00173,Ukraine_Kyiv_2014_QED21539.1:0.00055)0.085:0.00057,(((Uganda_R8_2015_AXB49385.1:0.0,Uganda_R7_2015_AXB49559.1:0.0,Uganda_R25_2015_AXB49731.1:0.0,Uganda_N10_2015_AXB49902.1:0.0,Uganda_R35_2015_AXB50075.1:0.0):0.01171,Kenya_Bus_2006_AJL34333.1:0.01745)1.000:0.19646,((China_AnhuiXCGQ_2018_AYW34130.1:0.0,Poland_Pol16_20186_o7_2016-2017_AXZ95930.1:0.0,Poland_Pol17_04461_C210_2016-2017_AXZ96213.1:0.0,Estonia_2014_SPS73418.1:0.0,Estonia_2014_SPS73584.1:0.0,Russia_Georgia_2007_CBW46827.1:0.0,China_HLJ_2018_QBH90648.1:0.0,China_LN_2018_QBH90833.1:0.0,China_wbBS01_2018_QDL88191.1:0.0,Ukraine_Kyiv_2014_QED21780.1:0.0,Belgium_Etalle_wb_2018_QED90604.1:0.0,Lithuania_LT14_2014_QEY87967.1:0.0):0.19593,(Spain_E75_1975_CBH29100.1:0.01669,Italy_47_Ss_2008_2008_AOO54308.1:0.00055)0.914:0.10922)0.986:0.07144)0.998:0.08308)0.741:0.00415,(China_AnhuiXCGQ_2018_AYW33974.1:0.0,Poland_ASFV_POL_Podlaskie_2015_CAN10098.1:0.0,Russia_Odintsovo_2014_CAN10098.1:0.0,China_HLJ_2018_QBH90466.1:0.0,China_LN_2018_QBH90651.1:0.0,China_wbBS01_2018_CAN10098.1:0.0,Ukraine_Kyiv_2014_CAN10098.1:0.0,Belgium_Etalle_wb_2018_QED90424.1:0.0,Lithuania_LT14_2014_QEY87782.1:0.0):0.05150)0.944:0.00276)0.887:0.00054,(Spain_BA71_1971_AKO62684.1:0.0,Portugal_OURT_88.3_1988_CAN10350.1:0.0,Portugal_L60_1960_AIY22189.1:0.0,Portugal_NHV_1968_AIY22352.1:0.0,Benin_1997_CAN10098.1:0.0,South_Africa_MGR_Mkuzi_1979_CAN10098.1:0.0):0.00055)0.992:0.02881,(South_Africa_Warmbaths_1987_CAN10098.1:0.00055,(Namibia_Warthog_1980_CAN10098.1:0.00541,(South_Africa_1985_CAN10098.1:0.00055,South_Africa_2_2008_CAN10098.1:0.00419)1.000:0.27275)0.867:0.00053)0.860:0.00620);"
+    // tree from Yokoyama et al http://www.ncbi.nlm.nih.gov/pubmed/18768804
+	var site_url="http://asfvdb.popgenetics.net/index/gene";
+	var org_name_cor = new Array();
+         org_name_cor["Spain_BA71_1971_AKO62684.1"] = "KP055815/AKO62684.1";
+	       org_name_cor["China_AnhuiXCGQ_2018_AYW33974.1"] = "MK128995/AYW33974.1";
+	       org_name_cor["China_AnhuiXCGQ_2018_AYW34130.1"] = "MK128995/AYW34130.1";
+	       org_name_cor["China_ASFV-SY18_2018_AOO54308.1"] = "MH766894/AOO54308.1";
+	       org_name_cor["China_ASFV-SY18_2018_AJZ77131.1"] = "MH766894/AJZ77131.1";
+	       org_name_cor["China_ASFV-SY18_2018_AKO62684.1"] = "MH766894/AKO62684.1";
+	       org_name_cor["Poland_Pol16_20186_o7_2016-2017_AXZ95769.1"] = "MG939583/AXZ95769.1";
+	       org_name_cor["Poland_Pol16_20186_o7_2016-2017_AXZ95930.1"] = "MG939583/AXZ95930.1";
+	       org_name_cor["Poland_Pol16_20538_o9_2016-2017_AXZ95935.1"] = "MG939584/AXZ95935.1";
+	       org_name_cor["Poland_Pol16_20540_o10_2016-2017_AXZ95946.1"] = "MG939585/AXZ95946.1";
+	       org_name_cor["Poland_Pol16_29413_o23_2016-2017_AXZ95949.1"] = "MG939586/AXZ95949.1";
+	       org_name_cor["Poland_Pol17_03029_C201_2016-2017_AXZ95966.1"] = "MG939587/AXZ95966.1";
+	       org_name_cor["Poland_Pol17_04461_C210_2016-2017_AXZ96061.1"] = "MG939588/AXZ96061.1";
+	       org_name_cor["Poland_Pol17_04461_C210_2016-2017_AXZ96213.1"] = "MG939588/AXZ96213.1";
+	       org_name_cor["Poland_Pol17_05838_C220_2016-2017_AXZ96220.1"] = "MG939589/AXZ96220.1";
+	       org_name_cor["Poland_ASFV_POL_Podlaskie_2015_CAN10098.1"] = "MH681419/CAN10098.1";
+	       org_name_cor["Uganda_R8_2015_AXB49385.1"] = "MH025916/AXB49385.1";
+	       org_name_cor["Uganda_R7_2015_AXB49559.1"] = "MH025917/AXB49559.1";
+	       org_name_cor["Uganda_R25_2015_AXB49731.1"] = "MH025918/AXB49731.1";
+	       org_name_cor["Uganda_N10_2015_AXB49902.1"] = "MH025919/AXB49902.1";
+	       org_name_cor["Uganda_R35_2015_AXB50075.1"] = "MH025920/AXB50075.1";
+	       org_name_cor["Estonia_2014_SPS73418.1"] = "LS478113/SPS73418.1";
+	       org_name_cor["Estonia_2014_SPS73584.1"] = "LS478113/SPS73584.1";
+	       org_name_cor["Italy_26544_OG10_2010_AJZ77131.1"] = "KM102979/AJZ77131.1";
+	       org_name_cor["Italy_47_Ss_2008_2008_AOO54308.1"] = "KX354450/AOO54308.1";
+	       org_name_cor["Italy_47_Ss_2008_2008_AOO54309.1"] = "KX354450/AOO54309.1";
+	       org_name_cor["Portugal_OURT_88.3_1988_CAN10350.1"] = "AM712240/CAN10350.1";
+	       org_name_cor["Spain_E75_1975_CBH29100.1"] = "FN557520/CBH29100.1";
+	       org_name_cor["Russia_Georgia_2007_CBW46643.1"] = "FR682468/CBW46643.1";
+	       org_name_cor["Russia_Georgia_2007_CBW46827.1"] = "FR682468/CBW46827.1";
+	       org_name_cor["Kenya_Bus_2006_AJL34333.1"] = "KM111295/AJL34333.1";
+	       org_name_cor["Russia_Odintsovo_2014_CAN10098.1"] = "KP843857/CAN10098.1";
+	       org_name_cor["Portugal_L60_1960_AIY22189.1"] = "KM262844/AIY22189.1";
+	       org_name_cor["Portugal_NHV_1968_AIY22352.1"] = "KM262845/AIY22352.1";
+	       org_name_cor["Benin_1997_CAN10098.1"] = "AM712239/CAN10098.1";
+	       org_name_cor["Benin_1997_CAN10098.1"] = "AM712239/CAN10098.1";
+	       org_name_cor["South_Africa_MGR_Mkuzi_1979_CAN10098.1"] = "AY261362/CAN10098.1";
+	       org_name_cor["Namibia_Warthog_1980_CAN10098.1"] = "AY261366/CAN10098.1";
+	       org_name_cor["South_Africa_Warmbaths_1987_CAN10098.1"] = "AY261365/CAN10098.1";
+	       org_name_cor["Malawi_Tengani_1962_CAN10098.1"] = "AY261364/CAN10098.1";
+	       org_name_cor["China_HLJ_2018_QBH90466.1"] = "MK333180/QBH90466.1";
+	       org_name_cor["China_HLJ_2018_QBH90648.1"] = "MK333180/QBH90648.1";
+	       org_name_cor["China_LN_2018_QBH90651.1"] = "MK333181/QBH90651.1";
+	       org_name_cor["China_LN_2018_QBH90833.1"] = "MK333181/QBH90833.1";
+	       org_name_cor["China_wbBS01_2018_CAN10098.1"] = "MK645909/CAN10098.1";
+	       org_name_cor["China_wbBS01_2018_QDL88010.1"] = "MK645909/QDL88010.1";
+	       org_name_cor["China_wbBS01_2018_QDL88191.1"] = "MK645909/QDL88191.1";
+	       org_name_cor["Ukraine_Kyiv_2014_CAN10098.1"] = "MN194591/CAN10098.1";
+	       org_name_cor["Ukraine_Kyiv_2014_QED21539.1"] = "MN194591/QED21539.1";
+	       org_name_cor["Ukraine_Kyiv_2014_QED21540.1"] = "MN194591/QED21540.1";
+	       org_name_cor["Ukraine_Kyiv_2014_QED21780.1"] = "MN194591/QED21780.1";
+	       org_name_cor["Belgium_Etalle_wb_2018_QED90424.1"] = "MK543947/QED90424.1";
+	       org_name_cor["Belgium_Etalle_wb_2018_QED90604.1"] = "MK543947/QED90604.1";
+	       org_name_cor["Lithuania_LT14_2014_QEY87782.1"] = "MK628478/QEY87782.1";
+	       org_name_cor["Lithuania_LT14_2014_QEY87783.1"] = "MK628478/QEY87783.1";
+	       org_name_cor["Lithuania_LT14_2014_QEY87967.1"] = "MK628478/QEY87967.1";
+	       org_name_cor["South_Africa_1985_CAN10098.1"] = "MN394630/CAN10098.1";
+	       org_name_cor["South_Africa_2_2008_CAN10098.1"] = "MN336500/CAN10098.1";
+
+
+    var tree = d3.layout.phylotree()
+      // create a tree layout object
+      .svg(d3.select("#tree_display"))
+      .options({
+        'left-right-spacing': 'fit-to-size',
+        'top-bottom-spacing': 'fit-to-size',
+				brush: true,
+        zoom: false,
+        "show-scale": true
+      })
+      .node_circle_size (3).spacing_x (10, true).size([800,800]).align_tips(true).radial(false);
+    // render to this SVG element
+
+    tree(example_tree).layout();
+    // layout and render the tree
+
+    // for syntax highlighting
+    //hljs.initHighlightingOnLoad();
+  </script>
+
+ </center>
+</body>
+</html>
+
